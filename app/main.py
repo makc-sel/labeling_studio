@@ -17,6 +17,3 @@ app.include_router(user_router)
 app.include_router(species_router)
 app.include_router(bbox_router)
 app.include_router(poly_router)
-
-# run uvicorn app.main:app
-# test pytest -v
