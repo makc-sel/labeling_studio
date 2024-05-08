@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 from sqlalchemy.orm import Session
-from sqlalchemy import insert, select, update
+from sqlalchemy import select
 from app.core import database
 from app import schemas
 
@@ -125,7 +125,6 @@ def get_bboxes(db:Session, skip=0, limit=100, task_id:int|None=None) -> list[dat
         return db.execute(select(database.BboxAnnotation).filter(database.BboxAnnotation.task_id == task_id).offset(skip).limit(limit))
     return db.execute(select(database.BboxAnnotation).offset(skip).limit(limit)).scalars()
 
-
 def get_bbox_by_id(db:Session, bbox_id:int) -> database.BboxAnnotation:
     bbox = db.get(database.BboxAnnotation, bbox_id)
     return bbox
@@ -143,7 +142,6 @@ def create_bboxes(db:Session, new_bboxes: list[schemas.BboxAnnotationBase]) -> l
     for db_bbox in db_bboxes:
         db.refresh(db_bbox)
     return db_bboxes
-
 
 def create_bbox(db:Session, new_bbox: schemas.BboxAnnotationBase) -> database.BboxAnnotation:
     db_bbox = database.BboxAnnotation(**new_bbox.model_dump())

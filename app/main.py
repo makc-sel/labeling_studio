@@ -5,7 +5,7 @@ from app.routes.user import user_router
 from app.routes.species import species_router
 from app.routes.bbox import bbox_router
 from app.routes.polygon import poly_router
-from app.core.database import Base, engine, SessionLocal
+from app.core.database import Base, engine
 
 Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
